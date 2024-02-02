@@ -1,10 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
+from searchtweets import load_credentials, gen_rule_payload, collect_results
 
 app = Flask(__name__)
+credentials = load_credentials(filename="./app.py",
+                yaml_key="app",
+                env_overwrite=False)
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('app.html')
+    rule = gen_rule_payload("keyword", results_per_call=100)
+    tweets = collect_results(rule, max_results=100, result_stream_args=credentials)
+    return jsonify(tweets), render_template('app.html')
 
 
 
