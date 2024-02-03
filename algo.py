@@ -12,7 +12,7 @@ from newsapi import NewsApiClient
 
 def scrape_news(ticker):
     data = []
-    newsapi = NewsApiClient(api_key='2c8d1b7bc85044e2974985132597e395')
+    newsapi = NewsApiClient(api_key='558d470b216c41fcba2173ee0f6395c6')
     everything = newsapi.get_everything(q=ticker, language='en')
 
     for article in everything['articles']:
