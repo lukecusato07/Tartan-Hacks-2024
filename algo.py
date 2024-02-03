@@ -53,7 +53,7 @@ def get_sentiment(data):
 
     for val in data:
         ss = sid.polarity_scores(val)
-        result += ss['neu']
+        result += ss['compound']
         total += 1
 
     result = result/total
