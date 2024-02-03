@@ -1,3 +1,4 @@
+
 '''<script async src="https://cse.google.com/cse.js?cx=e3bff4e8fad4e4527">
 </script>
 <div class="gcse-search"></div>
@@ -6,12 +7,18 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 from googleapiclient.discovery import build
+from newsapi import NewsApiClient
 
 
+def scrape_news(ticker):
+    data = []
+    newsapi = NewsApiClient(api_key='2c8d1b7bc85044e2974985132597e395')
+    everything = newsapi.get_everything(q=ticker, language='en')
 
+    for article in everything['articles']:
+        data.append(article['title'])
 
-def train():
-    return
+    return data
 
 def scrape_google(ticker):
     titles = []
@@ -31,6 +38,8 @@ def pull_data(ticker, source):
         data = scrape_google(query)
     elif source == "twitter":
         data = scrape_twitter(query)
+    elif source == "news":
+        data = scrape_news(query)
     else:
         data = []
 
