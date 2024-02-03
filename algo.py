@@ -1,0 +1,10 @@
+
+
+
+
+
+
+
+
+def analyze(ticker, source):
+    
