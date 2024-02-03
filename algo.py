@@ -5,10 +5,6 @@
 
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
-from requests import get
-from lxml.html import fromstring
-import cssselect
-from urllib.parse import urlencode, urlparse, parse_qs
 from googleapiclient.discovery import build
 
 
@@ -26,13 +22,15 @@ def scrape_google(ticker):
         titles.append(result['title'])
     return titles
 
+def scrape_twitter(ticker):
+    pass
+
 def pull_data(ticker, source):
-    data = ["bad"] * 100 + ["good"] * 800
+    query = ticker + "+ stock"
     if source == "google":
-        query = ticker + "+ stock"
         data = scrape_google(query)
-    elif source == "reddit":
-        pass
+    elif source == "twitter":
+        data = scrape_twitter(query)
     else:
         data = []
 
@@ -66,5 +64,3 @@ def analyze(ticker, source):
         final =  get_sentiment(data)
     
     return final
-
-print(analyze("apple",'google'))
