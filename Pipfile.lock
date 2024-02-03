@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e48d3a64561d457595780dd21ddae00a21df6901c384cfc358c89b2e02786da1"
+            "sha256": "7b0df92948092ce769a0fd2a6474e97f3ab688693580252d953c4a66b2f3be02"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -357,11 +357,11 @@
         },
         "gdown": {
             "hashes": [
-                "sha256:173557b4d33aad9f7dc75ce2ff963d8b313f36371e15da4b5ebb35ac6c7d5af6",
-                "sha256:3f595fcfd4b1bccd5cf73453f60984c5fa1c18eed499277a52b23337238c2670"
+                "sha256:421530fd238fa15d41ba43219a79fdc28efe8ac11022173abad333701b77de2c",
+                "sha256:550a72dc5ca2819fe4bcc15d80d05d7c98c0b90e57256254b77d0256b9df4683"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==5.0.1"
+            "version": "==5.1.0"
         },
         "gensim": {
             "hashes": [
@@ -842,6 +842,14 @@
             "markers": "python_version >= '3.9'",
             "version": "==3.2.1"
         },
+        "newsapi-python": {
+            "hashes": [
+                "sha256:11d34013a24d92ca7b7cbdac84ed2d504862b1e22467bc2a9a6913a70962318e",
+                "sha256:a4b66d5dd9892198cdaa476f7542f2625cdd218e5e3121c8f880b2ace717a3c2"
+            ],
+            "index": "pypi",
+            "version": "==0.2.7"
+        },
         "nltk": {
             "hashes": [
                 "sha256:1834da3d0682cba4f2cede2f9aad6b0fafb6461ba451db0efb6f9c39798d64d3",
@@ -977,12 +985,12 @@
         },
         "pip": {
             "hashes": [
-                "sha256:5052d7889c1f9d05224cd41741acb7c5d6fa735ab34e339624a614eaaa7e7d76",
-                "sha256:7fd9972f96db22c8077a1ee2691b172c8089b17a5652a44494a9ecb0d78f9149"
+                "sha256:ba0d021a166865d2265246961bec0152ff124de910c5cc39f1156ce3fa7c69dc",
+                "sha256:ea9bd1a847e8c5774a5777bb398c19e80bcd4e2aa16a4b301b718fe6f593aba2"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.7'",
-            "version": "==23.3.2"
+            "version": "==24.0"
         },
         "pptree": {
             "hashes": [

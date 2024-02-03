@@ -15,6 +15,7 @@ google-search-results = "*"
 serpapi = "*"
 lxml = "*"
 cssselect = "*"
+newsapi-python = "*"
 
 [dev-packages]
 

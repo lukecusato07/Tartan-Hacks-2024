@@ -10,8 +10,8 @@
 
 	<body class="container text-center more-margin">
     <div class="row align-items-center">
-				<h1>{{ stock_name }} ({{ stock_exchange }})</h1>
-				<h2>Stock Score{{ stock_analysis }}</h2>
+				<h1>{{ stock_name }} (<a href ="https://finance.yahoo.com/quote/{{stock_ticker}}" target="_blank">{{stock_ticker}}</a>) - {{ exchange_name }}</h1>
+				<h2>Stock Score: {{ stock_analysis }}</h2>
 		</div>
 	</body>
 </html>
