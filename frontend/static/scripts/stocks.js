@@ -22,9 +22,10 @@ function preloadData() {
 
 async function changeMarket() {
     chosen_market = document.getElementById("market_selector").value;
-
     current_stocks = chosen_market === "NASDAQ" ? nasdaq_stocks : nyse_stocks;
 
+    document.getElementById("datalist_stocks").value = "";
+    document.getElementById('submit_button_div').classList.add("d-none");
     var select = document.getElementById('datalistOptions'); 
 
     await remove_prev_options(select);
@@ -37,28 +38,23 @@ async function changeMarket() {
 }
 
 function search_fill(select) {
-        // Create a new Set to track what has been added
-        let addedSymbols = new Set();
+        const fragment = document.createDocumentFragment();
     
         for(var i = 0; i < current_stocks.length; i++) {
-            var symbol = current_stocks[i].symbol;
-            var name = current_stocks[i].name + " - " + symbol;
-            // Check if the symbol has already been added
-            if(!addedSymbols.has(symbol)){
-                var option = document.createElement('option');
-                option.innerHTML = name;
-                option.value = name;
-                select.appendChild(option);
-                // Add the symbol to the Set
-                addedSymbols.add(symbol);
-            }
+            var option = document.createElement('option');
+            var name = current_stocks[i].name + " - " + current_stocks[i].symbol;
+            option.innerHTML = name;
+            option.value = name;
+            fragment.appendChild(option);
         }
-    }
+    
+        select.appendChild(fragment);
+}
+
+    
 
 function remove_prev_options(select) {
-    while (select.options.length > 0) {                
-        select.remove(0);
-    }        
+        select.innerHTML = '';
 }
 
 function show_submit_button() {
