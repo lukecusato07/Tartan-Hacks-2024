@@ -48,21 +48,13 @@ def pull_data(ticker, source):
 def get_sentiment(data):
     nltk.download('vader_lexicon')
     sid = SentimentIntensityAnalyzer()
-    pos = 0
-    neg = 0
     result = 0
 
     for val in data:
         ss = sid.polarity_scores(val)
-        if(ss['neu'] > .5):
-            pass
-        elif ss['pos'] > .5 or ss['neg'] < .5:
-            pos += 1
-        else:
-            neg += 1
+        result += ss['pos']
 
-    if pos > neg:
-        result = 1
+    result = result/len(data)
 
     return result
 
