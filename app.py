@@ -1,19 +1,33 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from algo import *
 from searchtweets import load_credentials, gen_rule_payload, collect_results
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='./frontend/templates', static_folder='./frontend/static')
 
 # credentials = load_credentials(filename="./app.py",
-#                 yaml_key="app",
-#                 env_overwrite=False)
+#                                                             yaml_key="app",
+#                                                             env_overwrite=False)
 
-# @app.route('/', methods=['GET'])
-# def index():
-#     rule = gen_rule_payload("keyword", results_per_call=100)
-#     tweets = collect_results(rule, max_results=100, result_stream_args=credentials)
-#     return jsonify(tweets), render_template('app.html')
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
+@app.route('/app')
+def show_form():
+    return render_template('form.html')
+
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    print(request.form['datalist_stocks'])
+    # rule = gen_rule_payload("keyword", results_per_call=100)
+    # tweets = collect_results(rule, max_results=100, result_stream_args=credentials)
+    # return redirect(url_for('app/query', data=jsonify(tweets)))
+    return render_template('index.html')
+
+@app.route('/app/query')
+def show_data():
+    data = request.args.get('data')
+    return render_template('show_data.html', data=data)
 
 
 if __name__ == '__main__':
