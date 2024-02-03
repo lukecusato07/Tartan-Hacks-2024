@@ -18,8 +18,10 @@ def submit_form():
     exchange_name = request.form['selector_exchange'].split("/")[0].upper()
 
     result = analyze(stock_ticker, 'news')
+    urls = [x for x in scrape_news(stock_ticker)]
+    print(urls)
 
-    return redirect(url_for('show_data', stock_analysis=result, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name))
+    return redirect(url_for('show_data', stock_analysis=result, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name, stock_urls=urls))
 
 @app.route('/app/query')
 def show_data():
@@ -27,6 +29,7 @@ def show_data():
     stock_name = request.args.get('stock_name')
     stock_ticker = request.args.get('stock_ticker')
     exchange_name = request.args.get('exchange_name')
+    url = request.args.get('stock_urls')
     return render_template('show_data.html', stock_analysis=stock_analysis, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name)
 
 
