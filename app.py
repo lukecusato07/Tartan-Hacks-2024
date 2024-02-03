@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, json
+from flask import Flask, render_template, request, redirect, url_for
 from algo import *
 
 app = Flask(__name__, template_folder='./frontend/templates', static_folder='./frontend/static')
