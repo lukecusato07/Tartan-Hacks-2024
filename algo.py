@@ -49,14 +49,12 @@ def get_sentiment(data):
     nltk.download('vader_lexicon')
     sid = SentimentIntensityAnalyzer()
     result = 0
-    total = 0
 
     for val in data:
         ss = sid.polarity_scores(val)
-        result += ss['compound']
-        total += 1
+        result += ss['pos']
 
-    result = result/total
+    result = result/len(data)
 
     return result
 
@@ -67,5 +65,3 @@ def analyze(ticker, source):
         final =  get_sentiment(data)
     
     return final
-
-print(analyze('apple', 'news'))
