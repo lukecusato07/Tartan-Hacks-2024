@@ -13,15 +13,14 @@ def show_form():
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    stock_name = request.form['datalist_stocks'].split("(")[0]
-    stock_ticker = request.form['datalist_stocks'].split("(")[1].split(")")[0]
+    stock_name, stock_ticker = request.form['datalist_stocks'].split("-")
     exchange_name = request.form['selector_exchange'].split("/")[0].upper()
 
     result = analyze(stock_ticker, 'news')
-    urls = [x for x in scrape_news(stock_ticker)]
+    urls = scrape_news(stock_ticker)
     print(urls)
 
-    return redirect(url_for('show_data', stock_analysis=result, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name, stock_urls=urls))
+    return redirect(url_for('show_data', stock_analysis=result, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name))
 
 @app.route('/app/query')
 def show_data():
@@ -29,7 +28,6 @@ def show_data():
     stock_name = request.args.get('stock_name')
     stock_ticker = request.args.get('stock_ticker')
     exchange_name = request.args.get('exchange_name')
-    url = request.args.get('stock_urls')
     return render_template('show_data.html', stock_analysis=stock_analysis, stock_name=stock_name, stock_ticker=stock_ticker, exchange_name=exchange_name)
 
 
