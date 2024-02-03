@@ -13,10 +13,10 @@ from newsapi import NewsApiClient
 def scrape_news(ticker):
     data = []
     newsapi = NewsApiClient(api_key='2c8d1b7bc85044e2974985132597e395')
-    everything = newsapi.get_everything(q=ticker, language='en')
+    everything = newsapi.get_top_headlines(q=ticker, language='en')
 
     for article in everything['articles']:
-        data.append(article['title'])
+        data.append(article)
 
     return data
 
@@ -39,7 +39,10 @@ def pull_data(ticker, source):
     elif source == "twitter":
         data = scrape_twitter(query)
     elif source == "news":
-        data = scrape_news(query)
+        tmp = scrape_news(query)
+        data = []
+        for t in tmp:
+            data.append(t['title'])
     else:
         data = []
 
@@ -52,8 +55,12 @@ def get_sentiment(data):
 
     for val in data:
         ss = sid.polarity_scores(val)
-        result += ss['pos']
-
+        if(ss['neg'] > .55):
+            result += (1 - ss['neg'])
+        elif(ss['pos'] > .55):
+            result += ss['pos']
+        else:
+            result += ss['neu']
     result = result/len(data)
 
     return result
