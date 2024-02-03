@@ -1,12 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, json
 from algo import *
 from searchtweets import load_credentials, gen_rule_payload, collect_results
 
 app = Flask(__name__, template_folder='./frontend/templates', static_folder='./frontend/static')
-
-# credentials = load_credentials(filename="./app.py",
-#                                                             yaml_key="app",
-#                                                             env_overwrite=False)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -18,16 +14,19 @@ def show_form():
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
-    print(request.form['datalist_stocks'])
-    # rule = gen_rule_payload("keyword", results_per_call=100)
-    # tweets = collect_results(rule, max_results=100, result_stream_args=credentials)
-    # return redirect(url_for('app/query', data=jsonify(tweets)))
-    return render_template('index.html')
+    stock = request.form['datalist_stocks']
+    exchange = request.form['selector_exchange'].split("/")[0].upper()
+
+    result = analyze(stock, 'google')
+
+    return redirect(url_for('show_data', stock_analysis=result, stock_name=stock, exchange_name=exchange))
 
 @app.route('/app/query')
 def show_data():
-    data = request.args.get('data')
-    return render_template('show_data.html', data=data)
+    stock_analysis = request.args.get('stock_analysis')
+    stock_name = request.args.get('stock_name')
+    exchange_name = request.args.get('exchange_name')
+    return render_template('show_data.html', stock_analysis=stock_analysis, stock_name=stock_name, exchange_name=exchange_name)
 
 
 if __name__ == '__main__':
