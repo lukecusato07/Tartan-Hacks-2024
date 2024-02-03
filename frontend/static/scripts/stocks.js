@@ -31,7 +31,7 @@ async function search_fill() {
                 var option = document.createElement('option');
                 var name = current_stocks[i].name + " (" + current_stocks[i].symbol + ")";
                 option.innerHTML = name;
-                option.value = current_stocks[i].symbol;
+                option.value = name;
                 select.appendChild(option);
         }
 }
