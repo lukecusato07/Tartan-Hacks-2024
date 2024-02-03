@@ -8,6 +8,13 @@ flask = "*"
 nltk = "*"
 searchtweets = "*"
 flair = "*"
+google-api-python-client = "*"
+pip = "*"
+install = "*"
+google-search-results = "*"
+serpapi = "*"
+lxml = "*"
+cssselect = "*"
 
 [dev-packages]
 
